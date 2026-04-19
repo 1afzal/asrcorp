@@ -4,11 +4,11 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 
 const navLinks = [
-  { label: 'Home', path: '/' },
-  { label: 'About', path: '/about' },
-  { label: 'Services', path: '/services' },
-  { label: 'Projects', path: '/projects' },
-  { label: 'Contact', path: '/contact' },
+  { label: 'Home', path: '/', num: '01' },
+  { label: 'About', path: '/about', num: '02' },
+  { label: 'Services', path: '/services', num: '03' },
+  { label: 'Projects', path: '/projects', num: '04' },
+  { label: 'Contact', path: '/contact', num: '05' },
 ] as const;
 
 export default function Navbar() {
@@ -41,100 +41,80 @@ export default function Navbar() {
 
   return (
     <>
-      <motion.header
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ duration: 0.6, ease: 'easeOut' }}
-        className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 ${
+      <header
+        className={`fixed top-0 inset-x-0 z-50 transition-all duration-200 ${
           scrolled
-            ? 'glass shadow-lg shadow-black/10'
+            ? 'bg-dark/90 backdrop-blur-md border-b border-border-dark'
             : 'bg-transparent'
         }`}
       >
-        <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-8">
+        <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5 lg:px-8">
           {/* ── Logo ── */}
-          <Link to="/" className="flex items-center gap-0.5">
-            <span className="font-display text-2xl font-bold tracking-tight">
-              <span className="text-brand-amber">ASR</span>
-              <span className={scrolled ? 'text-brand-warm-white' : 'text-brand-charcoal'}>
-                CORP
-              </span>
+          <Link to="/" className="flex items-center">
+            <span className="font-heading text-2xl font-extrabold tracking-tight">
+              <span className="text-coral">A</span>
+              <span className="text-white">SR</span>
             </span>
           </Link>
 
-          {/* ── Desktop nav links ── */}
+          {/* ── Desktop nav links (RIGHT aligned) ── */}
           <ul className="hidden items-center gap-8 md:flex">
             {navLinks.map(({ label, path }) => (
               <li key={path}>
                 <Link
                   to={path}
-                  className={`relative pb-1 text-sm font-medium tracking-wide transition-colors duration-300 ${
+                  className={`relative font-body text-sm font-medium uppercase tracking-[0.15em] transition-colors duration-200 ${
                     isActive(path)
-                      ? 'text-brand-amber'
-                      : scrolled
-                        ? 'text-brand-warm-white/80 hover:text-brand-amber'
-                        : 'text-brand-charcoal/80 hover:text-brand-amber'
+                      ? 'text-coral'
+                      : 'text-white/70 hover:text-white'
                   }`}
                 >
                   {label}
                   {isActive(path) && (
-                    <motion.span
-                      layoutId="nav-underline"
-                      className="absolute inset-x-0 -bottom-0.5 h-0.5 rounded-full bg-brand-amber"
-                      transition={{ type: 'spring', stiffness: 380, damping: 30 }}
-                    />
+                    <span className="flex justify-center mt-1">
+                      <span className="block w-1 h-1 bg-coral rounded-full" />
+                    </span>
                   )}
                 </Link>
               </li>
             ))}
           </ul>
 
-          {/* ── CTA + mobile toggle ── */}
-          <div className="flex items-center gap-4">
-            <Link
-              to="/quote"
-              className="hidden rounded-md bg-brand-amber px-5 py-2.5 text-sm font-semibold text-white transition-colors duration-300 hover:bg-brand-amber-light md:inline-block"
-            >
-              Get a Quote
-            </Link>
-
-            <button
-              type="button"
-              aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
-              onClick={() => setMobileOpen((prev) => !prev)}
-              className={`relative z-50 md:hidden ${
-                scrolled || mobileOpen ? 'text-brand-warm-white' : 'text-brand-charcoal'
-              }`}
-            >
-              <AnimatePresence mode="wait" initial={false}>
-                {mobileOpen ? (
-                  <motion.span
-                    key="close"
-                    initial={{ rotate: -90, opacity: 0 }}
-                    animate={{ rotate: 0, opacity: 1 }}
-                    exit={{ rotate: 90, opacity: 0 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    <X size={26} />
-                  </motion.span>
-                ) : (
-                  <motion.span
-                    key="menu"
-                    initial={{ rotate: 90, opacity: 0 }}
-                    animate={{ rotate: 0, opacity: 1 }}
-                    exit={{ rotate: -90, opacity: 0 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    <Menu size={26} />
-                  </motion.span>
-                )}
-              </AnimatePresence>
-            </button>
-          </div>
+          {/* ── Mobile toggle ── */}
+          <button
+            type="button"
+            aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
+            onClick={() => setMobileOpen((prev) => !prev)}
+            className="relative z-50 text-white md:hidden"
+          >
+            <AnimatePresence mode="wait" initial={false}>
+              {mobileOpen ? (
+                <motion.span
+                  key="close"
+                  initial={{ rotate: -90, opacity: 0 }}
+                  animate={{ rotate: 0, opacity: 1 }}
+                  exit={{ rotate: 90, opacity: 0 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <X size={26} />
+                </motion.span>
+              ) : (
+                <motion.span
+                  key="menu"
+                  initial={{ rotate: 90, opacity: 0 }}
+                  animate={{ rotate: 0, opacity: 1 }}
+                  exit={{ rotate: -90, opacity: 0 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <Menu size={26} />
+                </motion.span>
+              )}
+            </AnimatePresence>
+          </button>
         </nav>
-      </motion.header>
+      </header>
 
-      {/* ── Mobile overlay ── */}
+      {/* ── Mobile full-screen overlay ── */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
@@ -143,44 +123,74 @@ export default function Navbar() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-40 flex flex-col items-center justify-center bg-brand-charcoal/95 backdrop-blur-md md:hidden"
+            className="fixed inset-0 z-40 flex flex-col bg-dark md:hidden"
           >
-            <nav className="flex flex-col items-center gap-8">
-              {navLinks.map(({ label, path }, i) => (
+            {/* Close button */}
+            <button
+              type="button"
+              aria-label="Close menu"
+              onClick={() => setMobileOpen(false)}
+              className="absolute top-5 right-6 z-50 text-white"
+            >
+              <X size={28} />
+            </button>
+
+            {/* Navigation links */}
+            <nav className="flex flex-1 flex-col justify-center px-10">
+              {navLinks.map(({ label, path, num }, i) => (
                 <motion.div
                   key={path}
-                  initial={{ opacity: 0, y: 24 }}
+                  initial={{ opacity: 0, y: 60 }}
                   animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 24 }}
-                  transition={{ delay: i * 0.07, duration: 0.35, ease: 'easeOut' }}
+                  exit={{ opacity: 0, y: 60 }}
+                  transition={{
+                    delay: i * 0.08,
+                    duration: 0.5,
+                    ease: [0.22, 1, 0.36, 1],
+                  }}
+                  className="mb-6"
                 >
                   <Link
                     to={path}
-                    className={`font-display text-3xl font-semibold tracking-wide transition-colors duration-300 ${
-                      isActive(path)
-                        ? 'text-brand-amber'
-                        : 'text-brand-warm-white hover:text-brand-amber'
-                    }`}
+                    className="group flex items-baseline gap-4"
                   >
-                    {label}
+                    <span className="font-body text-sm text-coral">
+                      {num}
+                    </span>
+                    <span
+                      className={`font-heading text-5xl md:text-7xl font-extrabold transition-colors duration-200 ${
+                        isActive(path)
+                          ? 'text-coral'
+                          : 'text-white group-hover:text-white/80'
+                      }`}
+                    >
+                      {label}
+                    </span>
                   </Link>
                 </motion.div>
               ))}
-
-              <motion.div
-                initial={{ opacity: 0, y: 24 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 24 }}
-                transition={{ delay: navLinks.length * 0.07, duration: 0.35, ease: 'easeOut' }}
-              >
-                <Link
-                  to="/quote"
-                  className="mt-4 inline-block rounded-md bg-brand-amber px-8 py-3 text-lg font-semibold text-white transition-colors duration-300 hover:bg-brand-amber-light"
-                >
-                  Get a Quote
-                </Link>
-              </motion.div>
             </nav>
+
+            {/* Bottom contact info */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.5, duration: 0.4 }}
+              className="px-10 pb-10 flex flex-col gap-1"
+            >
+              <a
+                href="mailto:info@asrcorporation.com"
+                className="font-body text-sm text-muted hover:text-coral transition-colors duration-200"
+              >
+                info@asrcorporation.com
+              </a>
+              <a
+                href="tel:+918242456789"
+                className="font-body text-sm text-muted hover:text-coral transition-colors duration-200"
+              >
+                +91 824 245 6789
+              </a>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>

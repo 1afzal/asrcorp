@@ -16,18 +16,16 @@ interface ButtonProps {
 }
 
 const variantClasses: Record<Variant, string> = {
-  primary:
-    'bg-brand-amber text-white hover:bg-brand-amber/85',
-  secondary:
-    'bg-brand-charcoal text-white hover:bg-brand-surface',
+  primary: 'bg-coral text-white magnetic-btn',
+  secondary: 'bg-dark text-white magnetic-btn',
   outline:
-    'border-2 border-brand-amber text-brand-amber hover:bg-brand-amber hover:text-white',
+    'border border-white/30 text-white hover:border-coral hover:text-coral',
 };
 
 const sizeClasses: Record<Size, string> = {
-  sm: 'px-4 py-2 text-sm',
-  md: 'px-6 py-3 text-base',
-  lg: 'px-8 py-4 text-lg',
+  sm: 'px-5 py-2.5 text-xs',
+  md: 'px-7 py-3.5 text-sm',
+  lg: 'px-10 py-4.5 text-sm',
 };
 
 const MotionLink = motion.create(Link);
@@ -42,7 +40,7 @@ export default function Button({
   type = 'button',
 }: ButtonProps) {
   const base =
-    'inline-flex items-center justify-center font-body font-semibold rounded-md transition-colors duration-300 cursor-pointer';
+    'inline-flex items-center justify-center font-body font-semibold uppercase tracking-wider rounded-none cursor-pointer transition-all duration-300';
   const classes = `${base} ${variantClasses[variant]} ${sizeClasses[size]} ${className}`;
 
   const motionProps = {
@@ -54,7 +52,7 @@ export default function Button({
   if (href) {
     return (
       <MotionLink to={href} className={classes} {...motionProps}>
-        {children}
+        <span className="relative z-10">{children}</span>
       </MotionLink>
     );
   }
@@ -66,7 +64,7 @@ export default function Button({
       onClick={onClick}
       {...motionProps}
     >
-      {children}
+      <span className="relative z-10">{children}</span>
     </motion.button>
   );
 }

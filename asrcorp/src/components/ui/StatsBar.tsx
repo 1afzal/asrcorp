@@ -1,6 +1,5 @@
-import { useRef } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import { motion, useInView, animate } from 'framer-motion';
-import { useEffect, useState } from 'react';
 
 interface StatItem {
   value: number;
@@ -9,13 +8,21 @@ interface StatItem {
 }
 
 const stats: StatItem[] = [
-  { value: 15, suffix: '+', label: 'Years Experience' },
-  { value: 500, suffix: '+', label: 'Projects Completed' },
-  { value: 350, suffix: '+', label: 'Happy Clients' },
-  { value: 10, suffix: '+', label: 'Cities Covered' },
+  { value: 5, suffix: '+', label: 'Years of Experience' },
+  { value: 10, suffix: '+', label: 'Projects Delivered' },
+  { value: 200, suffix: '+', label: 'Happy Clients' },
+  { value: 5, suffix: '+', label: 'Cities Covered' },
 ];
 
-function AnimatedNumber({ value, suffix, inView }: { value: number; suffix: string; inView: boolean }) {
+function AnimatedNumber({
+  value,
+  suffix,
+  inView,
+}: {
+  value: number;
+  suffix: string;
+  inView: boolean;
+}) {
   const [display, setDisplay] = useState(0);
 
   useEffect(() => {
@@ -23,7 +30,7 @@ function AnimatedNumber({ value, suffix, inView }: { value: number; suffix: stri
 
     const controls = animate(0, value, {
       duration: 2,
-      ease: 'easeOut',
+      ease: [0.22, 1, 0.36, 1] as [number, number, number, number],
       onUpdate(v) {
         setDisplay(Math.round(v));
       },
@@ -33,30 +40,42 @@ function AnimatedNumber({ value, suffix, inView }: { value: number; suffix: stri
   }, [inView, value]);
 
   return (
-    <span className="font-display text-4xl md:text-5xl font-bold text-brand-amber">
+    <span className="font-heading text-6xl md:text-7xl font-extrabold gradient-text">
       {display}
-      {suffix}
+      <span className="gradient-text">{suffix}</span>
     </span>
   );
 }
 
 export default function StatsBar() {
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: '-80px' });
+  const isInView = useInView(ref, { once: true, margin: '-60px' });
 
   return (
-    <section ref={ref} className="bg-brand-charcoal py-16 md:py-20">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <section ref={ref} className="relative bg-dark grain py-20 px-6">
+      <div className="relative z-10 mx-auto max-w-7xl">
         <motion.div
-          className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-4"
-          initial={{ opacity: 0, y: 20 }}
+          className="grid grid-cols-2 md:grid-cols-4 gap-10 md:gap-0"
+          initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, ease: 'easeOut' }}
+          transition={{
+            duration: 0.7,
+            ease: [0.22, 1, 0.36, 1] as [number, number, number, number],
+          }}
         >
-          {stats.map((stat) => (
-            <div key={stat.label} className="flex flex-col items-center text-center gap-2">
-              <AnimatedNumber value={stat.value} suffix={stat.suffix} inView={isInView} />
-              <span className="text-sm md:text-base text-white/80 font-body tracking-wide uppercase">
+          {stats.map((stat, i) => (
+            <div key={stat.label} className="relative flex flex-col items-center text-center gap-2">
+              {/* Vertical divider — hidden on first item and on mobile */}
+              {i > 0 && (
+                <div className="hidden md:block absolute left-0 top-1/2 -translate-y-1/2 h-16 w-px bg-border-dark" />
+              )}
+
+              <AnimatedNumber
+                value={stat.value}
+                suffix={stat.suffix}
+                inView={isInView}
+              />
+              <span className="text-muted uppercase text-xs tracking-[0.2em] font-body mt-3">
                 {stat.label}
               </span>
             </div>

@@ -7,6 +7,7 @@ import FeaturedProjects from '@/components/sections/FeaturedProjects';
 import Testimonials from '@/components/sections/Testimonials';
 import WhyChooseUs from '@/components/sections/WhyChooseUs';
 import CeoSpotlight from '@/components/sections/CeoSpotlight';
+import ProofOfWork from '@/components/sections/ProofOfWork';
 import CtaBanner from '@/components/sections/CtaBanner';
 
 export default function Home() {
@@ -22,6 +23,7 @@ export default function Home() {
       <FeaturedProjects />
       <Testimonials />
       <WhyChooseUs />
+      <ProofOfWork />
       <CeoSpotlight />
       <CtaBanner />
     </PageTransition>

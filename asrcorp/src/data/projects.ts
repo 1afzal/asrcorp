@@ -2,22 +2,22 @@ import type { Project } from '@/types';
 
 export const projects: Project[] = [
   {
-    id: 'mangaluru-skyline-tower',
-    title: 'Mangaluru Skyline Tower',
+    id: 'ullal-max-fort',
+    title: 'Ullal Max Fort Apartment',
     category: 'Construction',
-    location: 'Kankanady, Mangaluru',
-    year: 2025,
+    location: 'Ullal, Mangalore',
+    year: 2024,
     imageUrl: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800',
-    description: 'A 12-storey commercial tower featuring reinforced concrete construction with advanced corrosion protection, designed to endure decades of coastal weather exposure. The building includes a rainwater harvesting system and energy-efficient facade glazing.',
+    description: 'A premium residential apartment project in Ullal featuring modern construction techniques, monsoon-grade waterproofing, and contemporary architectural design. Built to withstand coastal weather conditions with quality finishes throughout.',
   },
   {
-    id: 'coastal-breeze-apartments',
-    title: 'Coastal Breeze Apartments',
+    id: 'bhoomi-hill-view',
+    title: 'Bhoomi Hill View',
     category: 'Construction',
-    location: 'Surathkal, Mangaluru',
+    location: 'Kaikamba, Mangalore',
     year: 2024,
     imageUrl: 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800',
-    description: 'A 48-unit residential apartment complex built with cross-ventilation corridors and monsoon-grade waterproofing on every floor. Located minutes from NITK Surathkal, each unit features sea-facing balconies and humidity-resistant interior finishes.',
+    description: 'A scenic residential development in Kaikamba offering panoramic hill views with carefully planned layouts, premium amenities, and construction engineered for the unique terrain and climate of the Mangalore region.',
   },
   {
     id: 'kadri-heritage-villa',

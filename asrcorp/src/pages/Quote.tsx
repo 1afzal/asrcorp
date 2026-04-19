@@ -118,92 +118,96 @@ export default function Quote() {
     setIsSubmitted(true);
   };
 
-  const inputClass = 'w-full px-4 py-3 border border-brand-stone/20 rounded-sm bg-brand-warm-white text-brand-charcoal placeholder-brand-stone/50 transition-colors';
+  const inputClass = 'w-full bg-light-muted border border-border-light text-dark placeholder-muted/50 py-3 px-4 font-body focus:border-coral focus:outline-none transition-colors';
 
   return (
     <PageTransition>
       {/* Hero */}
-      <section className="relative py-32 md:py-40 px-6 bg-brand-charcoal overflow-hidden">
+      <section className="relative bg-dark py-40 md:py-52 overflow-hidden">
         <div className="absolute inset-0">
           <img
             src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=1600&q=80"
             alt="Blueprint"
-            className="w-full h-full object-cover opacity-10"
+            className="w-full h-full object-cover opacity-15"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-brand-charcoal/50 to-brand-charcoal" />
+          <div className="absolute inset-0 bg-gradient-to-b from-dark/80 to-dark" />
         </div>
-        <div className="relative z-10 max-w-4xl mx-auto text-center">
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
+        <div className="grain" />
+        <div className="relative z-10 max-w-7xl mx-auto px-6">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            className="font-display text-5xl md:text-7xl font-bold text-white"
+            transition={{ duration: 0.6, ease: 'easeOut' as const }}
           >
-            Get a <span className="gradient-text italic">Free Quote</span>
-          </motion.h1>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            className="text-gray-300 mt-6 max-w-xl mx-auto text-lg"
-          >
-            Tell us about your project and we&apos;ll provide a detailed estimate within 48 hours.
-          </motion.p>
+            <h1 className="font-heading text-5xl md:text-7xl font-extrabold text-white leading-[1.05]">
+              GET A FREE<br />
+              <span className="gradient-text">QUOTE</span>
+            </h1>
+          </motion.div>
         </div>
       </section>
 
       {/* Form Section */}
-      <section className="py-24 px-6 bg-brand-warm-white">
+      <section className="bg-light py-24 px-6">
         <div className="max-w-3xl mx-auto">
           {/* Progress Steps */}
           <div className="flex items-center justify-between mb-16">
             {steps.map((step, index) => (
-              <div key={step.number} className="flex items-center">
+              <div key={step.number} className="flex items-center flex-1 last:flex-none">
                 <div className="flex flex-col items-center">
                   <div
-                    className={`w-12 h-12 rounded-full flex items-center justify-center transition-all duration-500 ${
+                    className={`w-10 h-10 flex items-center justify-center font-heading font-bold text-sm transition-all duration-500 ${
                       currentStep > step.number
-                        ? 'bg-brand-amber text-white'
+                        ? 'text-coral'
                         : currentStep === step.number
-                        ? 'bg-brand-amber text-white ring-4 ring-brand-amber/20'
-                        : 'bg-white border-2 border-brand-stone/20 text-brand-stone'
+                        ? 'text-coral ring-2 ring-coral ring-offset-2 ring-offset-light rounded-full'
+                        : 'text-muted'
                     }`}
                   >
                     {currentStep > step.number ? (
-                      <Check className="w-5 h-5" />
+                      <Check className="w-5 h-5 text-coral" />
                     ) : (
-                      <step.icon className="w-5 h-5" />
+                      <span>{step.number}</span>
                     )}
                   </div>
                   <span className={`text-xs mt-2 font-body hidden sm:block ${
-                    currentStep >= step.number ? 'text-brand-charcoal font-medium' : 'text-brand-stone'
+                    currentStep >= step.number ? 'text-dark font-semibold' : 'text-muted'
                   }`}>
                     {step.title}
                   </span>
                 </div>
                 {index < steps.length - 1 && (
-                  <div className={`flex-1 h-px mx-4 transition-colors duration-500 ${
-                    currentStep > step.number ? 'bg-brand-amber' : 'bg-brand-stone/20'
+                  <div className={`flex-1 h-px mx-3 transition-colors duration-500 ${
+                    currentStep > step.number ? 'bg-coral' : 'bg-border-light'
                   }`} />
                 )}
               </div>
             ))}
           </div>
 
-          {/* Form Steps */}
-          <div className="bg-white p-8 md:p-12 rounded-sm shadow-lg min-h-[400px]">
+          {/* Form Card */}
+          <div className="bg-white border border-border-light p-8 md:p-12 shadow-[0_8px_30px_rgba(0,0,0,0.04)] min-h-[400px]">
             {isSubmitted ? (
               <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 className="text-center py-16"
               >
-                <div className="w-20 h-20 mx-auto bg-green-100 rounded-full flex items-center justify-center mb-6">
-                  <Check className="w-10 h-10 text-green-600" />
+                <div className="gradient-text text-7xl font-heading font-extrabold mb-6">
+                  <Check className="w-16 h-16 mx-auto" style={{ stroke: 'url(#grad)' }} />
+                  <svg width="0" height="0">
+                    <defs>
+                      <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stopColor="#FF4D4D" />
+                        <stop offset="100%" stopColor="#FFB800" />
+                      </linearGradient>
+                    </defs>
+                  </svg>
                 </div>
-                <h2 className="font-display text-3xl font-bold text-brand-charcoal mb-3">
-                  Quote Request Submitted!
+                <h2 className="font-heading text-3xl font-extrabold text-dark mb-3">
+                  Quote Submitted!
                 </h2>
-                <p className="text-brand-stone max-w-md mx-auto">
+                <p className="text-muted max-w-md mx-auto">
                   Thank you, {formData.name}! Our team will review your project details and
                   get back to you with a detailed estimate within 48 hours.
                 </p>
@@ -224,29 +228,29 @@ export default function Quote() {
                     className="space-y-6"
                   >
                     <div>
-                      <h2 className="font-display text-2xl font-bold text-brand-charcoal mb-1">Personal Information</h2>
-                      <p className="text-brand-stone text-sm">Let us know how to reach you.</p>
+                      <h2 className="font-heading text-2xl font-extrabold text-dark mb-1">Personal Information</h2>
+                      <p className="text-muted text-sm">Let us know how to reach you.</p>
                     </div>
                     <div>
-                      <label htmlFor="q-name" className="block text-sm font-medium text-brand-charcoal mb-2">Full Name *</label>
+                      <label htmlFor="q-name" className="block text-sm font-medium text-dark mb-2">Full Name *</label>
                       <input id="q-name" type="text" {...step1Form.register('name')} className={inputClass} placeholder="Your full name" />
-                      {step1Form.formState.errors.name && <p className="mt-1 text-sm text-red-500">{step1Form.formState.errors.name.message}</p>}
+                      {step1Form.formState.errors.name && <p className="mt-1 text-sm text-coral">{step1Form.formState.errors.name.message}</p>}
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div>
-                        <label htmlFor="q-email" className="block text-sm font-medium text-brand-charcoal mb-2">Email *</label>
+                        <label htmlFor="q-email" className="block text-sm font-medium text-dark mb-2">Email *</label>
                         <input id="q-email" type="email" {...step1Form.register('email')} className={inputClass} placeholder="you@example.com" />
-                        {step1Form.formState.errors.email && <p className="mt-1 text-sm text-red-500">{step1Form.formState.errors.email.message}</p>}
+                        {step1Form.formState.errors.email && <p className="mt-1 text-sm text-coral">{step1Form.formState.errors.email.message}</p>}
                       </div>
                       <div>
-                        <label htmlFor="q-phone" className="block text-sm font-medium text-brand-charcoal mb-2">Phone *</label>
+                        <label htmlFor="q-phone" className="block text-sm font-medium text-dark mb-2">Phone *</label>
                         <input id="q-phone" type="tel" {...step1Form.register('phone')} className={inputClass} placeholder="+91 XXX XXX XXXX" />
-                        {step1Form.formState.errors.phone && <p className="mt-1 text-sm text-red-500">{step1Form.formState.errors.phone.message}</p>}
+                        {step1Form.formState.errors.phone && <p className="mt-1 text-sm text-coral">{step1Form.formState.errors.phone.message}</p>}
                       </div>
                     </div>
                     <div className="flex justify-end pt-4">
-                      <button type="submit" className="flex items-center gap-2 px-8 py-3 bg-brand-amber text-white font-body font-semibold rounded-sm hover:bg-brand-amber-light transition-colors">
-                        Next <ArrowRight className="w-4 h-4" />
+                      <button type="submit" className="magnetic-btn bg-coral text-white uppercase tracking-wider font-semibold px-8 py-4">
+                        <span className="flex items-center gap-2">Next <ArrowRight className="w-4 h-4" /></span>
                       </button>
                     </div>
                   </motion.form>
@@ -266,43 +270,43 @@ export default function Quote() {
                     className="space-y-6"
                   >
                     <div>
-                      <h2 className="font-display text-2xl font-bold text-brand-charcoal mb-1">Project Details</h2>
-                      <p className="text-brand-stone text-sm">Tell us about your project requirements.</p>
+                      <h2 className="font-heading text-2xl font-extrabold text-dark mb-1">Project Details</h2>
+                      <p className="text-muted text-sm">Tell us about your project requirements.</p>
                     </div>
                     <div>
-                      <label htmlFor="q-service" className="block text-sm font-medium text-brand-charcoal mb-2">Service Type *</label>
+                      <label htmlFor="q-service" className="block text-sm font-medium text-dark mb-2">Service Type *</label>
                       <select id="q-service" {...step2Form.register('serviceType')} className={inputClass}>
                         <option value="">Select a service</option>
                         {serviceOptions.map((s) => <option key={s} value={s}>{s}</option>)}
                       </select>
-                      {step2Form.formState.errors.serviceType && <p className="mt-1 text-sm text-red-500">{step2Form.formState.errors.serviceType.message}</p>}
+                      {step2Form.formState.errors.serviceType && <p className="mt-1 text-sm text-coral">{step2Form.formState.errors.serviceType.message}</p>}
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div>
-                        <label htmlFor="q-location" className="block text-sm font-medium text-brand-charcoal mb-2">Project Location *</label>
+                        <label htmlFor="q-location" className="block text-sm font-medium text-dark mb-2">Project Location *</label>
                         <input id="q-location" type="text" {...step2Form.register('location')} className={inputClass} placeholder="e.g., Kadri, Mangaluru" />
-                        {step2Form.formState.errors.location && <p className="mt-1 text-sm text-red-500">{step2Form.formState.errors.location.message}</p>}
+                        {step2Form.formState.errors.location && <p className="mt-1 text-sm text-coral">{step2Form.formState.errors.location.message}</p>}
                       </div>
                       <div>
-                        <label htmlFor="q-area" className="block text-sm font-medium text-brand-charcoal mb-2">Area (sq. ft.) *</label>
+                        <label htmlFor="q-area" className="block text-sm font-medium text-dark mb-2">Area (sq. ft.) *</label>
                         <input id="q-area" type="text" {...step2Form.register('areaSqft')} className={inputClass} placeholder="e.g., 1500" />
-                        {step2Form.formState.errors.areaSqft && <p className="mt-1 text-sm text-red-500">{step2Form.formState.errors.areaSqft.message}</p>}
+                        {step2Form.formState.errors.areaSqft && <p className="mt-1 text-sm text-coral">{step2Form.formState.errors.areaSqft.message}</p>}
                       </div>
                     </div>
                     <div>
-                      <label htmlFor="q-budget" className="block text-sm font-medium text-brand-charcoal mb-2">Budget Range *</label>
+                      <label htmlFor="q-budget" className="block text-sm font-medium text-dark mb-2">Budget Range *</label>
                       <select id="q-budget" {...step2Form.register('budgetRange')} className={inputClass}>
                         <option value="">Select budget range</option>
                         {budgetRanges.map((b) => <option key={b} value={b}>{b}</option>)}
                       </select>
-                      {step2Form.formState.errors.budgetRange && <p className="mt-1 text-sm text-red-500">{step2Form.formState.errors.budgetRange.message}</p>}
+                      {step2Form.formState.errors.budgetRange && <p className="mt-1 text-sm text-coral">{step2Form.formState.errors.budgetRange.message}</p>}
                     </div>
                     <div className="flex justify-between pt-4">
-                      <button type="button" onClick={goBack} className="flex items-center gap-2 px-6 py-3 border border-brand-stone/20 text-brand-stone font-body font-medium rounded-sm hover:border-brand-amber hover:text-brand-amber transition-colors">
+                      <button type="button" onClick={goBack} className="border border-border-light text-muted hover:border-coral hover:text-coral px-6 py-3 font-body transition-colors flex items-center gap-2">
                         <ArrowLeft className="w-4 h-4" /> Back
                       </button>
-                      <button type="submit" className="flex items-center gap-2 px-8 py-3 bg-brand-amber text-white font-body font-semibold rounded-sm hover:bg-brand-amber-light transition-colors">
-                        Next <ArrowRight className="w-4 h-4" />
+                      <button type="submit" className="magnetic-btn bg-coral text-white uppercase tracking-wider font-semibold px-8 py-4">
+                        <span className="flex items-center gap-2">Next <ArrowRight className="w-4 h-4" /></span>
                       </button>
                     </div>
                   </motion.form>
@@ -322,11 +326,11 @@ export default function Quote() {
                     className="space-y-6"
                   >
                     <div>
-                      <h2 className="font-display text-2xl font-bold text-brand-charcoal mb-1">Additional Details</h2>
-                      <p className="text-brand-stone text-sm">Any extra information that helps us understand your project better.</p>
+                      <h2 className="font-heading text-2xl font-extrabold text-dark mb-1">Additional Details</h2>
+                      <p className="text-muted text-sm">Any extra information that helps us understand your project better.</p>
                     </div>
                     <div>
-                      <label htmlFor="q-notes" className="block text-sm font-medium text-brand-charcoal mb-2">Project Notes</label>
+                      <label htmlFor="q-notes" className="block text-sm font-medium text-dark mb-2">Project Notes</label>
                       <textarea
                         id="q-notes"
                         rows={6}
@@ -336,26 +340,26 @@ export default function Quote() {
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-brand-charcoal mb-2">Reference Images (Optional)</label>
-                      <div className="border-2 border-dashed border-brand-stone/20 rounded-sm p-8 text-center hover:border-brand-amber/30 transition-colors cursor-pointer">
-                        <p className="text-brand-stone text-sm">
-                          Drag & drop images here, or <span className="text-brand-amber font-medium">browse files</span>
+                      <label className="block text-sm font-medium text-dark mb-2">Reference Images (Optional)</label>
+                      <div className="border-2 border-dashed border-border-light p-8 text-center hover:border-coral/40 transition-colors cursor-pointer">
+                        <p className="text-muted text-sm">
+                          Drag &amp; drop images here, or <span className="text-coral font-semibold">browse files</span>
                         </p>
-                        <p className="text-brand-stone/50 text-xs mt-1">PNG, JPG up to 10MB each</p>
+                        <p className="text-muted/50 text-xs mt-1">PNG, JPG up to 10MB each</p>
                       </div>
                     </div>
                     <div className="flex justify-between pt-4">
-                      <button type="button" onClick={goBack} className="flex items-center gap-2 px-6 py-3 border border-brand-stone/20 text-brand-stone font-body font-medium rounded-sm hover:border-brand-amber hover:text-brand-amber transition-colors">
+                      <button type="button" onClick={goBack} className="border border-border-light text-muted hover:border-coral hover:text-coral px-6 py-3 font-body transition-colors flex items-center gap-2">
                         <ArrowLeft className="w-4 h-4" /> Back
                       </button>
-                      <button type="submit" className="flex items-center gap-2 px-8 py-3 bg-brand-amber text-white font-body font-semibold rounded-sm hover:bg-brand-amber-light transition-colors">
-                        Review <ArrowRight className="w-4 h-4" />
+                      <button type="submit" className="magnetic-btn bg-coral text-white uppercase tracking-wider font-semibold px-8 py-4">
+                        <span className="flex items-center gap-2">Review <ArrowRight className="w-4 h-4" /></span>
                       </button>
                     </div>
                   </motion.form>
                 )}
 
-                {/* Step 4: Confirmation */}
+                {/* Step 4: Review */}
                 {currentStep === 4 && (
                   <motion.div
                     key="step4"
@@ -368,48 +372,48 @@ export default function Quote() {
                     className="space-y-6"
                   >
                     <div>
-                      <h2 className="font-display text-2xl font-bold text-brand-charcoal mb-1">Review Your Request</h2>
-                      <p className="text-brand-stone text-sm">Please verify your details before submitting.</p>
+                      <h2 className="font-heading text-2xl font-extrabold text-dark mb-1">Review Your Request</h2>
+                      <p className="text-muted text-sm">Please verify your details before submitting.</p>
                     </div>
 
                     <div className="space-y-4">
-                      <div className="bg-brand-warm-white p-6 rounded-sm">
-                        <h3 className="text-sm font-semibold text-brand-amber uppercase tracking-wider mb-3">Personal Info</h3>
+                      <div className="bg-light-muted border border-border-light p-6">
+                        <h3 className="text-coral text-xs font-semibold uppercase tracking-wider mb-3">Personal Info</h3>
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
-                          <div><span className="text-brand-stone">Name:</span> <span className="text-brand-charcoal font-medium">{formData.name}</span></div>
-                          <div><span className="text-brand-stone">Email:</span> <span className="text-brand-charcoal font-medium">{formData.email}</span></div>
-                          <div><span className="text-brand-stone">Phone:</span> <span className="text-brand-charcoal font-medium">{formData.phone}</span></div>
+                          <div><span className="text-muted">Name:</span> <span className="text-dark font-bold">{formData.name}</span></div>
+                          <div><span className="text-muted">Email:</span> <span className="text-dark font-bold">{formData.email}</span></div>
+                          <div><span className="text-muted">Phone:</span> <span className="text-dark font-bold">{formData.phone}</span></div>
                         </div>
                       </div>
 
-                      <div className="bg-brand-warm-white p-6 rounded-sm">
-                        <h3 className="text-sm font-semibold text-brand-amber uppercase tracking-wider mb-3">Project Details</h3>
+                      <div className="bg-light-muted border border-border-light p-6">
+                        <h3 className="text-coral text-xs font-semibold uppercase tracking-wider mb-3">Project Details</h3>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
-                          <div><span className="text-brand-stone">Service:</span> <span className="text-brand-charcoal font-medium">{formData.serviceType}</span></div>
-                          <div><span className="text-brand-stone">Location:</span> <span className="text-brand-charcoal font-medium">{formData.location}</span></div>
-                          <div><span className="text-brand-stone">Area:</span> <span className="text-brand-charcoal font-medium">{formData.areaSqft} sq. ft.</span></div>
-                          <div><span className="text-brand-stone">Budget:</span> <span className="text-brand-charcoal font-medium">{formData.budgetRange}</span></div>
+                          <div><span className="text-muted">Service:</span> <span className="text-dark font-bold">{formData.serviceType}</span></div>
+                          <div><span className="text-muted">Location:</span> <span className="text-dark font-bold">{formData.location}</span></div>
+                          <div><span className="text-muted">Area:</span> <span className="text-dark font-bold">{formData.areaSqft} sq. ft.</span></div>
+                          <div><span className="text-muted">Budget:</span> <span className="text-dark font-bold">{formData.budgetRange}</span></div>
                         </div>
                       </div>
 
                       {formData.notes && (
-                        <div className="bg-brand-warm-white p-6 rounded-sm">
-                          <h3 className="text-sm font-semibold text-brand-amber uppercase tracking-wider mb-3">Additional Notes</h3>
-                          <p className="text-brand-charcoal text-sm">{formData.notes}</p>
+                        <div className="bg-light-muted border border-border-light p-6">
+                          <h3 className="text-coral text-xs font-semibold uppercase tracking-wider mb-3">Additional Notes</h3>
+                          <p className="text-dark text-sm">{formData.notes}</p>
                         </div>
                       )}
                     </div>
 
                     <div className="flex justify-between pt-4">
-                      <button type="button" onClick={goBack} className="flex items-center gap-2 px-6 py-3 border border-brand-stone/20 text-brand-stone font-body font-medium rounded-sm hover:border-brand-amber hover:text-brand-amber transition-colors">
+                      <button type="button" onClick={goBack} className="border border-border-light text-muted hover:border-coral hover:text-coral px-6 py-3 font-body transition-colors flex items-center gap-2">
                         <ArrowLeft className="w-4 h-4" /> Back
                       </button>
                       <button
                         type="button"
                         onClick={handleFinalSubmit}
-                        className="flex items-center gap-2 px-8 py-3 bg-brand-amber text-white font-body font-semibold rounded-sm hover:bg-brand-amber-light transition-colors"
+                        className="magnetic-btn bg-coral text-white uppercase tracking-wider font-semibold px-8 py-4"
                       >
-                        Submit Request <Send className="w-4 h-4" />
+                        <span className="flex items-center gap-2">Submit Request <Send className="w-4 h-4" /></span>
                       </button>
                     </div>
                   </motion.div>

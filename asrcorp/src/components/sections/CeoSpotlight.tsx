@@ -1,53 +1,77 @@
-import SectionHeading from '@/components/ui/SectionHeading';
 import ScrollReveal from '@/components/ui/ScrollReveal';
 
 export default function CeoSpotlight() {
   return (
-    <section className="py-24 px-6 bg-brand-warm-white">
+    <section className="py-24 px-6 bg-light">
       <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          <ScrollReveal direction="left">
-            <div className="relative">
-              <div className="aspect-[3/4] max-w-md mx-auto lg:mx-0 rounded-sm overflow-hidden">
-                <img
-                  src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=600&q=80"
-                  alt="Afil Rahman, CEO of ASR Corporation"
-                  className="w-full h-full object-cover"
-                  loading="lazy"
-                />
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          {/* Image */}
+          <ScrollReveal direction="left" className="lg:col-span-5">
+            <div className="relative overflow-hidden aspect-[3/4]">
+              <img
+                src="/ceo.png"
+                alt="Afil Rahman, CEO of ASR Corporation"
+                className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
+                loading="lazy"
+              />
+              {/* Overlay badge */}
+              <div className="absolute bottom-4 left-4 bg-dark/80 backdrop-blur-sm px-4 py-3">
+                <span className="font-heading font-bold text-coral text-lg block leading-tight">
+                  5+ Years
+                </span>
+                <span className="text-white text-xs">Leading the Industry</span>
               </div>
-              {/* Decorative frame */}
-              <div className="absolute -bottom-4 -right-4 w-full h-full border-2 border-brand-amber/30 rounded-sm -z-10 hidden lg:block" />
             </div>
           </ScrollReveal>
 
-          <ScrollReveal direction="right">
+          {/* Text content */}
+          <ScrollReveal direction="right" className="lg:col-span-7 lg:pl-12">
             <div>
-              <div className="accent-line mb-6" />
-              <h2 className="font-display text-4xl md:text-5xl font-bold text-brand-charcoal mb-2">
-                Meet Our CEO
-              </h2>
-              <p className="font-display text-2xl text-brand-amber italic mb-8">
+              {/* Tag */}
+              <div className="flex items-center gap-2 mb-6">
+                <span className="inline-block w-2 h-2 bg-coral rounded-full" />
+                <span className="text-coral text-xs tracking-[0.2em] uppercase font-body font-semibold">
+                  LEADERSHIP
+                </span>
+              </div>
+
+              {/* Name */}
+              <h2 className="font-heading text-5xl md:text-6xl font-extrabold text-dark leading-tight">
                 Afil Rahman
+              </h2>
+
+              {/* Role */}
+              <p className="text-muted text-sm uppercase tracking-wider mt-2">
+                Founder &amp; CEO, ASR Corporation
               </p>
-              <p className="text-brand-stone leading-relaxed mb-6">
+
+              {/* Bio */}
+              <p className="text-muted leading-relaxed mt-8 font-body">
                 With a passion for excellence and an unwavering commitment to quality, Afil Rahman
                 founded ASR Corporation with a singular vision — to redefine the construction
                 landscape in Mangaluru and coastal Karnataka. Under his leadership, the company has
                 grown from a local construction firm to a trusted name in the industry.
               </p>
-              <p className="text-brand-stone leading-relaxed mb-8">
+              <p className="text-muted leading-relaxed mt-4 font-body">
                 A graduate in Civil Engineering with years of hands-on experience, Afil combines
                 technical expertise with an eye for design and a deep understanding of the region&apos;s
                 unique building requirements. His approach prioritizes sustainable construction
                 practices, client satisfaction, and architectural innovation.
               </p>
-              <div className="font-display text-3xl italic text-brand-charcoal">
-                Afil Rahman
-                <div className="w-32 h-px bg-brand-charcoal mt-2" />
-                <span className="text-sm not-italic tracking-[0.2em] uppercase text-brand-stone block mt-2">
-                  Founder &amp; CEO
+
+              {/* Pull quote */}
+              <div className="border-l-2 border-coral pl-6 mt-8">
+                <p className="italic text-dark font-body text-lg leading-relaxed">
+                  &ldquo;We don&apos;t just build structures — we build futures.&rdquo;
+                </p>
+              </div>
+
+              {/* Signature */}
+              <div className="mt-8">
+                <span className="font-heading font-bold text-dark text-lg block">
+                  Afil Rahman
                 </span>
+                <div className="accent-line mt-2" />
               </div>
             </div>
           </ScrollReveal>

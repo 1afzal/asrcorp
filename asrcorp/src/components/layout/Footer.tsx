@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Globe, Camera, Briefcase, MessageCircle } from 'lucide-react';
+import { Camera } from 'lucide-react';
 
 const quickLinks = [
   { label: 'Home', path: '/' },
@@ -20,92 +20,108 @@ const servicesList = [
 ];
 
 const socialLinks = [
-  { icon: Globe, href: '#', label: 'Facebook' },
-  { icon: Camera, href: '#', label: 'Instagram' },
-  { icon: Briefcase, href: '#', label: 'LinkedIn' },
-  { icon: MessageCircle, href: '#', label: 'Twitter' },
+  { icon: Camera, href: 'https://www.instagram.com/asr.corporation/', label: 'Instagram' },
 ];
 
 export default function Footer() {
   return (
-    <footer className="bg-brand-charcoal text-brand-warm-white">
-      <div className="mx-auto max-w-7xl px-6 py-16 lg:px-8">
+    <footer className="bg-dark relative overflow-hidden">
+      {/* ── Massive decorative text ── */}
+      <div className="pt-24 px-6 text-center leading-none select-none pointer-events-none">
+        <span className="font-heading text-6xl md:text-8xl lg:text-[10rem] font-extrabold text-white/5">
+          LET'S BUILD
+        </span>
+      </div>
+
+      {/* ── Main grid ── */}
+      <div className="mx-auto max-w-7xl px-6 pt-16 pb-0 lg:px-8">
         <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-4">
-          {/* Brand */}
-          <div className="space-y-5">
+          {/* Col 1 — Brand */}
+          <div className="space-y-4">
             <Link to="/" className="inline-block">
-              <span className="font-display text-2xl font-bold tracking-tight">
-                <span className="text-brand-amber">ASR</span>
-                <span className="text-brand-warm-white"> CORPORATION</span>
+              <span className="font-heading text-xl font-extrabold tracking-tight">
+                <span className="text-coral">A</span>
+                <span className="text-white">SR</span>
               </span>
             </Link>
-            <p className="font-display text-lg italic text-brand-amber-light">
+            <p className="text-muted text-sm italic">
               Building Dreams, Delivering Excellence
             </p>
-            <p className="text-sm leading-relaxed text-brand-stone">
+            <p className="text-muted text-sm leading-relaxed">
               ASR Corporation is a premier construction and real estate company
               based in Mangaluru, committed to transforming visions into
               architectural masterpieces with precision, quality, and integrity.
             </p>
           </div>
 
-          {/* Quick Links */}
+          {/* Col 2 — Navigate */}
           <div>
-            <h4 className="mb-5 font-display text-lg font-semibold text-brand-amber">
-              Quick Links
+            <h4 className="text-coral text-xs tracking-[0.2em] uppercase font-body font-semibold mb-6">
+              NAVIGATE
             </h4>
             <ul className="space-y-3">
               {quickLinks.map(({ label, path }) => (
                 <li key={path}>
                   <Link
                     to={path}
-                    className="text-sm text-brand-warm-white/70 transition-colors duration-300 hover:text-brand-amber"
+                    className="group flex items-center gap-2 text-white/60 text-sm transition-colors duration-200 hover:text-white"
                   >
-                    {label}
+                    <span>{label}</span>
+                    <span className="opacity-0 -translate-x-2 transition-all duration-200 group-hover:opacity-100 group-hover:translate-x-0 text-coral">
+                      &rarr;
+                    </span>
                   </Link>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Services */}
+          {/* Col 3 — Services */}
           <div>
-            <h4 className="mb-5 font-display text-lg font-semibold text-brand-amber">
-              Services
+            <h4 className="text-coral text-xs tracking-[0.2em] uppercase font-body font-semibold mb-6">
+              SERVICES
             </h4>
             <ul className="space-y-3">
               {servicesList.map((service) => (
                 <li key={service}>
                   <Link
                     to="/services"
-                    className="text-sm text-brand-warm-white/70 transition-colors duration-300 hover:text-brand-amber"
+                    className="group flex items-center gap-2 text-white/60 text-sm transition-colors duration-200 hover:text-white"
                   >
-                    {service}
+                    <span>{service}</span>
+                    <span className="opacity-0 -translate-x-2 transition-all duration-200 group-hover:opacity-100 group-hover:translate-x-0 text-coral">
+                      &rarr;
+                    </span>
                   </Link>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Contact */}
+          {/* Col 4 — Contact */}
           <div>
-            <h4 className="mb-5 font-display text-lg font-semibold text-brand-amber">
-              Contact Info
+            <h4 className="text-coral text-xs tracking-[0.2em] uppercase font-body font-semibold mb-6">
+              CONTACT
             </h4>
             <ul className="space-y-4 text-sm">
-              <li className="text-brand-warm-white/70">
-                <span className="mb-1 block font-semibold text-brand-warm-white">Address</span>
-                Kadri Hills, Mangaluru,<br />Karnataka 575002, India
+              <li className="text-white/60 leading-relaxed">
+                Kadri Hills, Mangaluru,
+                <br />
+                Karnataka 575002
               </li>
-              <li className="text-brand-warm-white/70">
-                <span className="mb-1 block font-semibold text-brand-warm-white">Phone</span>
-                <a href="tel:+918242456789" className="transition-colors duration-300 hover:text-brand-amber">
-                  +91 824 245 6789
+              <li>
+                <a
+                  href="tel:+918667150022"
+                  className="text-white/60 transition-colors duration-200 hover:text-coral"
+                >
+                  +91 8667 150 022
                 </a>
               </li>
-              <li className="text-brand-warm-white/70">
-                <span className="mb-1 block font-semibold text-brand-warm-white">Email</span>
-                <a href="mailto:info@asrcorporation.com" className="transition-colors duration-300 hover:text-brand-amber">
+              <li>
+                <a
+                  href="mailto:info@asrcorporation.com"
+                  className="text-white/60 transition-colors duration-200 hover:text-coral"
+                >
                   info@asrcorporation.com
                 </a>
               </li>
@@ -114,11 +130,17 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Bottom bar */}
-      <div className="border-t border-white/10">
-        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-6 py-6 sm:flex-row lg:px-8">
-          <p className="text-xs text-brand-stone">
-            &copy; 2024 ASR Corporation. All rights reserved.
+      {/* ── Divider ── */}
+      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+        <div className="border-t border-border-dark my-12" />
+      </div>
+
+      {/* ── Bottom bar ── */}
+      <div className="mx-auto max-w-7xl px-6 pb-10 lg:px-8">
+        <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
+          <p className="text-muted text-xs">
+            &copy; {new Date().getFullYear()} ASR Corporation. All rights
+            reserved.
           </p>
           <div className="flex items-center gap-4">
             {socialLinks.map(({ icon: Icon, href, label }) => (
@@ -126,9 +148,9 @@ export default function Footer() {
                 key={label}
                 href={href}
                 aria-label={label}
-                className="flex items-center justify-center w-9 h-9 border border-white/10 rounded-sm text-brand-stone transition-all duration-300 hover:text-brand-amber hover:border-brand-amber"
+                className="text-muted transition-colors duration-200 hover:text-coral"
               >
-                <Icon size={16} />
+                <Icon size={18} />
               </a>
             ))}
           </div>
