@@ -1,0 +1,319 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ──────────────────────────────────────────────────────────────
+   THEME TOKENS
+   Channel-format vars (e.g. `245 245 247`) plug into Tailwind via
+   `rgb(var(--token) / <alpha-value>)` so opacity modifiers work.
+   Pre-alpha'd vars (rgba(...)) are used directly.
+   ────────────────────────────────────────────────────────────── */
+
+:root,
+:root[data-theme='dark'] {
+  color-scheme: dark;
+
+  --background: 6 6 10;
+  --foreground: 245 245 247;
+  --primary: 245 245 247;
+  --primary-foreground: 10 10 10;
+  --secondary-foreground: 245 245 247;
+  --accent-foreground: 245 245 247;
+  --destructive: 255 69 58;
+  --destructive-foreground: 255 255 255;
+  --card-foreground: 245 245 247;
+
+  /* Theme-flipping monochrome — white in dark mode, black in light. */
+  --overlay: 255 255 255;
+
+  --muted: rgba(255, 255, 255, 0.06);
+  --muted-foreground: rgba(235, 235, 245, 0.55);
+  --border: rgba(255, 255, 255, 0.08);
+  --border-strong: rgba(255, 255, 255, 0.16);
+  --input: rgba(255, 255, 255, 0.1);
+  --ring: rgba(255, 255, 255, 0.24);
+  --secondary: rgba(255, 255, 255, 0.08);
+  --accent: rgba(255, 255, 255, 0.06);
+  --subtle: rgba(255, 255, 255, 0.04);
+  --card: rgba(28, 28, 30, 0.55);
+
+  /* Glass surfaces */
+  --glass-bg: rgba(28, 28, 30, 0.5);
+  --glass-strong-bg: rgba(44, 44, 46, 0.65);
+  --glass-nav-bg: rgba(20, 20, 22, 0.55);
+  --glass-input-bg: rgba(255, 255, 255, 0.04);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-strong-border: rgba(255, 255, 255, 0.1);
+  --glass-input-border: rgba(255, 255, 255, 0.08);
+  --glass-highlight: rgba(255, 255, 255, 0.06);
+  --glass-strong-highlight: rgba(255, 255, 255, 0.1);
+  --glass-nav-highlight: rgba(255, 255, 255, 0.12);
+  --glass-shadow: 0 20px 60px -20px rgba(0, 0, 0, 0.6);
+  --glass-strong-shadow: 0 20px 60px -20px rgba(0, 0, 0, 0.7);
+  --glass-nav-shadow: 0 24px 64px -16px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(0, 0, 0, 0.2);
+  --glass-nav-bottom: rgba(0, 0, 0, 0.2);
+
+  /* Ambient backdrop */
+  --orb-blue: rgba(10, 132, 255, 0.18);
+  --orb-violet: rgba(191, 90, 242, 0.16);
+  --orb-pink: rgba(255, 55, 95, 0.1);
+  --vignette-end: #06060a;
+
+  --selection-bg: rgba(255, 255, 255, 0.2);
+  --selection-fg: #ffffff;
+}
+
+:root[data-theme='light'] {
+  color-scheme: light;
+
+  --background: 250 250 250;
+  --foreground: 10 10 10;
+  --primary: 10 10 10;
+  --primary-foreground: 250 250 250;
+  --secondary-foreground: 10 10 10;
+  --accent-foreground: 10 10 10;
+  --destructive: 255 59 48;
+  --destructive-foreground: 255 255 255;
+  --card-foreground: 10 10 10;
+
+  --overlay: 0 0 0;
+
+  --muted: rgba(0, 0, 0, 0.05);
+  --muted-foreground: rgba(60, 60, 67, 0.6);
+  --border: rgba(0, 0, 0, 0.08);
+  --border-strong: rgba(0, 0, 0, 0.16);
+  --input: rgba(0, 0, 0, 0.1);
+  --ring: rgba(0, 0, 0, 0.24);
+  --secondary: rgba(0, 0, 0, 0.05);
+  --accent: rgba(0, 0, 0, 0.04);
+  --subtle: rgba(0, 0, 0, 0.03);
+  --card: rgba(255, 255, 255, 0.7);
+
+  --glass-bg: rgba(255, 255, 255, 0.55);
+  --glass-strong-bg: rgba(255, 255, 255, 0.78);
+  --glass-nav-bg: rgba(255, 255, 255, 0.7);
+  --glass-input-bg: rgba(0, 0, 0, 0.02);
+  --glass-border: rgba(0, 0, 0, 0.08);
+  --glass-strong-border: rgba(0, 0, 0, 0.1);
+  --glass-input-border: rgba(0, 0, 0, 0.08);
+  --glass-highlight: rgba(255, 255, 255, 0.6);
+  --glass-strong-highlight: rgba(255, 255, 255, 0.7);
+  --glass-nav-highlight: rgba(255, 255, 255, 0.95);
+  --glass-shadow: 0 20px 60px -20px rgba(0, 0, 0, 0.12);
+  --glass-strong-shadow: 0 20px 60px -20px rgba(0, 0, 0, 0.18);
+  --glass-nav-shadow: 0 24px 64px -16px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0, 0, 0, 0.04);
+  --glass-nav-bottom: rgba(0, 0, 0, 0.04);
+
+  --orb-blue: rgba(10, 132, 255, 0.1);
+  --orb-violet: rgba(191, 90, 242, 0.08);
+  --orb-pink: rgba(255, 55, 95, 0.06);
+  --vignette-end: #fafafa;
+
+  --selection-bg: rgba(0, 0, 0, 0.15);
+  --selection-fg: #0a0a0a;
+}
+
+:root {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+  background-color: rgb(var(--background));
+  /* Prevent stray horizontal scroll from ambient gradients, oversized hero
+     text, or marquee tracks on narrow mobile viewports. */
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
+body {
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    'SF Pro Display',
+    'SF Pro Text',
+    Inter,
+    ui-sans-serif,
+    system-ui,
+    'Segoe UI',
+    Roboto,
+    sans-serif;
+  color: rgb(var(--foreground));
+  font-feature-settings: 'cv11', 'ss01', 'ss03';
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+  /* Smooth handoff between themes — applies to text + backgrounds. */
+  transition: background-color 0.3s cubic-bezier(0.23, 1, 0.32, 1),
+    color 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+/* Ambient color field — same gradient stops, var-driven opacities so light
+   mode reads as a soft pastel wash and dark stays moody. */
+body::before {
+  content: '';
+  position: fixed;
+  inset: -20% -20% auto -20%;
+  height: 90vh;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    radial-gradient(60% 50% at 20% 10%, var(--orb-blue), transparent 60%),
+    radial-gradient(50% 40% at 85% 15%, var(--orb-violet), transparent 60%),
+    radial-gradient(40% 30% at 50% 70%, var(--orb-pink), transparent 60%);
+  filter: blur(60px);
+  transition: opacity 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background: radial-gradient(ellipse 100% 60% at 50% 0%, transparent, var(--vignette-end) 70%);
+  transition: background 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+#root {
+  position: relative;
+  z-index: 1;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgb(var(--overlay) / 0.1);
+  border-radius: 8px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(var(--overlay) / 0.2);
+}
+
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  overflow: hidden;
+}
+
+::selection {
+  background: var(--selection-bg);
+  color: var(--selection-fg);
+}
+
+/* ──────────────────────────────────────────────────────────────
+   LIQUID GLASS — all surfaces driven by tokens so they flip themes
+   automatically. */
+
+.glass {
+  background: var(--glass-bg);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid var(--glass-border);
+  box-shadow:
+    inset 0 1px 0 0 var(--glass-highlight),
+    var(--glass-shadow);
+  transition: background-color 0.3s cubic-bezier(0.23, 1, 0.32, 1),
+    border-color 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.glass-strong {
+  background: var(--glass-strong-bg);
+  -webkit-backdrop-filter: blur(32px) saturate(200%);
+  backdrop-filter: blur(32px) saturate(200%);
+  border: 1px solid var(--glass-strong-border);
+  box-shadow:
+    inset 0 1px 0 0 var(--glass-strong-highlight),
+    var(--glass-strong-shadow);
+}
+
+.glass-nav {
+  background: var(--glass-nav-bg);
+  -webkit-backdrop-filter: blur(40px) saturate(200%);
+  backdrop-filter: blur(40px) saturate(200%);
+  border: 1px solid var(--glass-border);
+  box-shadow:
+    inset 0 1px 0 0 var(--glass-nav-highlight),
+    inset 0 -1px 0 0 var(--glass-nav-bottom),
+    var(--glass-nav-shadow);
+}
+
+.glass-input {
+  background: var(--glass-input-bg);
+  -webkit-backdrop-filter: blur(12px) saturate(160%);
+  backdrop-filter: blur(12px) saturate(160%);
+  border: 1px solid var(--glass-input-border);
+  transition: background-color 0.2s cubic-bezier(0.23, 1, 0.32, 1),
+    border-color 0.2s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+/* Dot grid — used behind hero. Uses overlay var so it's visible in both themes. */
+.dot-grid {
+  background-image: radial-gradient(circle, rgb(var(--overlay) / 0.08) 1px, transparent 1px);
+  background-size: 28px 28px;
+  background-position: center;
+  -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, #000 30%, transparent 100%);
+  mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, #000 30%, transparent 100%);
+}
+
+/* Marquee */
+@keyframes marquee-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll var(--marquee-duration, 40s) linear infinite;
+}
+.marquee-mask {
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+}
+
+/* Floating cluster chips */
+@keyframes float-drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -8px, 0);
+  }
+}
+.float-slow {
+  animation: float-drift 7s ease-in-out infinite;
+}
+.float-med {
+  animation: float-drift 5.5s ease-in-out infinite 0.4s;
+}
+.float-fast {
+  animation: float-drift 4.2s ease-in-out infinite 1s;
+}
+
+.section-kicker {
+  font-feature-settings: 'tnum';
+  letter-spacing: 0.14em;
+}
+
+*:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 2px rgb(var(--background)),
+    0 0 0 4px var(--ring);
+}
